@@ -1,5 +1,6 @@
+# coding: utf-8
 # frozen_string_literal: true
-
+# coding: utf-8
 # -*- mode: ruby -*-
 # vi: set ft=ruby ts=2 sw=2 et:
 Vagrant.require_version '>= 2.2.4'
@@ -372,17 +373,16 @@ Vagrant.configure('2') do |config|
     v.linked_clone = true
   end
 
-  # Auto Download Vagrant plugins, supported from Vagrant 2.2.0
-  unless Vagrant.has_plugin?('vagrant-hostsupdater')
-    if File.file?(File.join(vagrant_dir, 'vagrant-hostsupdater.gem'))
-      system('vagrant plugin install ' + File.join(vagrant_dir, 'vagrant-hostsupdater.gem'))
-      File.delete(File.join(vagrant_dir, 'vagrant-hostsupdater.gem'))
-      puts "#{yellow}VVV has completed installing the vagrant-hostsupdater plugins. Please run the requested command again.#{creset}"
-      exit
-    else
-      config.vagrant.plugins = ['vagrant-hostsupdater']
-    end
-  end
+  # if !Vagrant.has_plugin?("vagrant-hostsupdater") then
+  #     if File.file?(File.join(vagrant_dir, 'vagrant-hostsupdater.gem')) then
+  #       system("vagrant plugin install " + File.join(vagrant_dir, 'vagrant-hostsupdater.gem'))
+  #       File.delete(File.join(vagrant_dir, 'vagrant-hostsupdater.gem'))
+  #       puts "#{yellow}VVV has completed installing local plugins. Please run the requested command again.#{creset}"
+  #       exit
+  #     else
+  #       config.vagrant.plugins = ["vagrant-hostsupdater"]
+  #     end
+  # end
 
   # The vbguest plugin has issues for some users, so we're going to disable it for now
   config.vbguest.auto_update = false if Vagrant.has_plugin?('vagrant-vbguest')
@@ -708,7 +708,7 @@ Vagrant.configure('2') do |config|
                       args: [
                         vvv_config['dashboard']['repo'],
                         vvv_config['dashboard']['branch']
-                      ], 
+                      ],
                       env: { "VVV_LOG" => "dashboard" }
 
   vvv_config['utility-sources'].each do |name, args|
@@ -720,7 +720,7 @@ Vagrant.configure('2') do |config|
                           name,
                           args['repo'].to_s,
                           args['branch']
-                        ], 
+                        ],
                         env: { "VVV_LOG" => "utility-source-#{name}" }
   end
 
