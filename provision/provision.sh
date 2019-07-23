@@ -145,6 +145,7 @@ apt_package_install_list=(
   # highlighting.
   #
   software-properties-common
+  python-certbot-nginx
 
   # PHP7
   #
