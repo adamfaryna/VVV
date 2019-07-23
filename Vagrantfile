@@ -769,6 +769,10 @@ Vagrant.configure('2') do |config|
     config.vm.provision 'post', type: 'shell', keep_color: true, path: File.join('provision', 'provision-post.sh'), env: { "VVV_LOG" => "post" }
   end
 
+  puts "Hosts #{vvv_config['hosts']}"
+  puts "Ip #{vvv_config['vm_config']['private_network_ip']}"
+  puts "Sites #{vvv_config['sites']}"
+
   # Local Machine Hosts
   #
   # If the Vagrant plugin hostsupdater (https://github.com/cogitatio/vagrant-hostsupdater) is
